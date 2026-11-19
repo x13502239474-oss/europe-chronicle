@@ -1,0 +1,31 @@
+/* 时间轴页 */
+
+.timeline-full {
+  padding: 40px 0 20px;
+}
+
+.era {
+  margin-bottom: 44px;
+}
+
+.era-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(176, 141, 87, 0.2);
+}
+
+.era-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  color: #f0ebe0;
+  font-weight: 600;
+  margin: 0;
+}
+
+.era-range {
+  color: var(--bronze-soft);
+  font-size: 14px;
+}

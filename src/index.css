@@ -1,0 +1,137 @@
+:root {
+  /* 主题色板：西方古典历史档案馆 × 现代大学学术出版物 */
+  --bg-deep: #0e1a2b;        /* 深海军蓝（主背景） */
+  --bg-slate: #1d2c42;       /* 石板蓝 */
+  --bg-slate-2: #24354f;     /* 石板蓝（浅一档，卡片） */
+  --paper: #f7f2e7;          /* 温润象牙白（阅读背景） */
+  --paper-soft: #efe9db;     /* 象牙白（浅） */
+  --bronze: #b08d57;         /* 古铜金 */
+  --bronze-soft: #c7a86b;    /* 低饱和金（重点标注） */
+  --crimson: #8a2f3b;        /* 暗红 */
+  --ink: #2b2620;            /* 深灰黑（正文） */
+  --ink-soft: #5a5248;       /* 次级文字 */
+  --ink-faint: #8a8174;      /* 弱化文字 */
+
+  /* 阅读模式（浅色） */
+  --read-bg: var(--paper);
+  --read-text: var(--ink);
+  --read-heading: #1a1510;
+  --read-accent: var(--crimson);
+  --read-link: #7a5a28;
+
+  /* 深色阅读模式 */
+  --dark-read-bg: #171d28;
+  --dark-read-text: #d8d3c8;
+  --dark-read-heading: #f0ebe0;
+  --dark-read-accent: var(--bronze-soft);
+
+  --max-w: 1120px;
+  --read-max-w: 760px;
+  --radius: 8px;
+
+  --font-serif: 'Georgia', 'Times New Roman', 'Songti SC', 'SimSun', serif;
+  --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
+
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 6px 30px rgba(0, 0, 0, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-deep);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* 通用容器 */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 章节编号金色标签 */
+.chip {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border: 1px solid var(--bronze);
+  color: var(--bronze-soft);
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+/* 按钮 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.18s ease;
+}
+
+.btn-gold {
+  background: var(--bronze);
+  color: #fff;
+}
+.btn-gold:hover {
+  background: var(--bronze-soft);
+}
+
+.btn-outline {
+  border-color: var(--bronze);
+  color: var(--bronze-soft);
+  background: transparent;
+}
+.btn-outline:hover {
+  background: rgba(176, 141, 87, 0.12);
+}
+
+/* 无障碍：焦点可见 */
+:focus-visible {
+  outline: 2px solid var(--bronze-soft);
+  outline-offset: 2px;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 16px;
+  }
+}

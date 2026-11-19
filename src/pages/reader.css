@@ -1,0 +1,330 @@
+/* 课程阅读页 */
+
+.reader {
+  --r-bg: var(--read-bg);
+  --r-text: var(--read-text);
+  --r-heading: var(--read-heading);
+  --r-accent: var(--read-accent);
+  --r-link: var(--read-link);
+  --r-muted: var(--ink-soft);
+  --r-border: rgba(0, 0, 0, 0.12);
+  --r-quote-bg: rgba(0, 0, 0, 0.04);
+  --r-code-bg: rgba(0, 0, 0, 0.05);
+}
+
+.reader.reader-dark {
+  --r-bg: var(--dark-read-bg);
+  --r-text: var(--dark-read-text);
+  --r-heading: var(--dark-read-heading);
+  --r-accent: var(--dark-read-accent);
+  --r-link: var(--bronze-soft);
+  --r-muted: #a9a193;
+  --r-border: rgba(255, 255, 255, 0.14);
+  --r-quote-bg: rgba(255, 255, 255, 0.05);
+  --r-code-bg: rgba(255, 255, 255, 0.07);
+}
+
+.reader {
+  background: var(--r-bg);
+  color: var(--r-text);
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* 阅读页顶部工具条 */
+.reader-topbar {
+  position: sticky;
+  top: 60px;
+  z-index: 90;
+  background: var(--r-bg);
+  border-bottom: 1px solid var(--r-border);
+  transition: background 0.3s ease;
+}
+
+.reader-topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 52px;
+}
+
+.reader-crumb {
+  color: var(--r-muted);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.reader-crumb a:hover {
+  color: var(--r-link);
+}
+.reader-crumb .sep {
+  color: var(--r-muted);
+  opacity: 0.6;
+}
+
+.reader-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid var(--r-border);
+  background: transparent;
+  color: var(--r-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.icon-btn:hover {
+  color: var(--r-accent);
+  border-color: var(--r-accent);
+}
+
+/* 正文容器 */
+.reader-body {
+  max-width: var(--read-max-w);
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* 课程题头 */
+.lesson-head {
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--r-border);
+}
+
+.lesson-head .chip {
+  color: var(--r-accent);
+  border-color: var(--r-accent);
+  margin-bottom: 14px;
+}
+
+.lesson-head h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 5vw, 36px);
+  line-height: 1.25;
+  color: var(--r-heading);
+  margin: 0 0 14px;
+  font-weight: 700;
+}
+
+.lesson-head .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--r-muted);
+  font-size: 13px;
+}
+
+/* ============ Markdown 正文排版 ============ */
+.markdown {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.95;
+  color: var(--r-text);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.markdown h2 {
+  font-family: var(--font-serif);
+  font-size: 25px;
+  line-height: 1.35;
+  color: var(--r-heading);
+  margin: 48px 0 18px;
+  font-weight: 700;
+  padding-left: 14px;
+  border-left: 3px solid var(--r-accent);
+}
+
+.markdown h3 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--r-heading);
+  margin: 34px 0 14px;
+  font-weight: 700;
+}
+
+.markdown p {
+  margin: 0 0 20px;
+}
+
+.markdown strong {
+  color: var(--r-accent);
+  font-weight: 700;
+}
+
+.markdown em {
+  color: var(--r-muted);
+}
+
+.markdown a {
+  color: var(--r-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.markdown ul,
+.markdown ol {
+  margin: 0 0 20px;
+  padding-left: 1.6em;
+}
+.markdown li {
+  margin-bottom: 8px;
+}
+.markdown li::marker {
+  color: var(--r-accent);
+}
+
+.markdown blockquote {
+  margin: 24px 0;
+  padding: 14px 20px;
+  border-left: 3px solid var(--r-accent);
+  background: var(--r-quote-bg);
+  border-radius: 0 6px 6px 0;
+  color: var(--r-muted);
+}
+.markdown blockquote p {
+  margin: 0;
+}
+
+.markdown hr {
+  border: none;
+  height: 1px;
+  background: var(--r-border);
+  margin: 36px 0;
+}
+
+.markdown code {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--r-code-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.markdown pre {
+  background: var(--r-code-bg);
+  padding: 16px 18px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+.markdown pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* 表格（制度对比等） */
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 16px;
+  line-height: 1.6;
+  display: block;
+  overflow-x: auto;
+}
+.markdown th,
+.markdown td {
+  border: 1px solid var(--r-border);
+  padding: 10px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+.markdown th {
+  background: var(--r-quote-bg);
+  color: var(--r-heading);
+  font-weight: 600;
+}
+
+/* 图片与图注 */
+.markdown img {
+  border-radius: 6px;
+  margin: 24px auto;
+  box-shadow: var(--shadow);
+}
+.markdown .figure-caption,
+.markdown figcaption {
+  text-align: center;
+  color: var(--r-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: -14px 0 24px;
+  font-family: var(--font-sans);
+}
+
+/* 重点标注框 */
+.markdown .callout {
+  border: 1px solid var(--r-border);
+  border-left: 3px solid var(--r-accent);
+  background: var(--r-quote-bg);
+  border-radius: 0 6px 6px 0;
+  padding: 14px 18px;
+  margin: 24px 0;
+}
+
+/* 上下课翻页 */
+.lesson-nav {
+  max-width: var(--read-max-w);
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.lesson-nav a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 18px;
+  border: 1px solid var(--r-border);
+  border-radius: 8px;
+  flex: 1;
+  max-width: 48%;
+  transition: all 0.15s ease;
+}
+.lesson-nav a:hover {
+  border-color: var(--r-accent);
+}
+.lesson-nav .dir {
+  font-size: 12px;
+  color: var(--r-muted);
+}
+.lesson-nav .ttl {
+  font-size: 15px;
+  color: var(--r-heading);
+  font-weight: 600;
+  line-height: 1.4;
+}
+.lesson-nav a.next {
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .markdown {
+    font-size: 17px;
+    line-height: 1.9;
+  }
+  .markdown h2 {
+    font-size: 22px;
+  }
+  .reader-body {
+    padding: 28px 16px 64px;
+  }
+}

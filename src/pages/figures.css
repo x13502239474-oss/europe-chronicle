@@ -1,0 +1,85 @@
+/* 人物档案页 */
+
+.figures-list {
+  padding: 40px 0;
+}
+
+.figures-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.figure-card {
+  background: var(--bg-slate);
+  border: 1px solid rgba(176, 141, 87, 0.14);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+.figure-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(176, 141, 87, 0.4);
+}
+
+.figure-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: #f0ebe0;
+  font-weight: 600;
+}
+
+.figure-lifespan {
+  color: var(--bronze-soft);
+  font-size: 13px;
+}
+
+.figure-role {
+  color: #a9a193;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.figure-links {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.figure-link {
+  font-size: 12px;
+  color: var(--bronze-soft);
+  border: 1px solid rgba(176, 141, 87, 0.35);
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+.figure-link:hover {
+  background: rgba(176, 141, 87, 0.12);
+}
+
+.figure-pending {
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 1000px) {
+  .figures-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .figures-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 460px) {
+  .figures-grid {
+    grid-template-columns: 1fr;
+  }
+}
