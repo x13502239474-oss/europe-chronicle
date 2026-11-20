@@ -107,3 +107,11 @@ a.figure-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 22px rgba(30, 26, 20, 0.12);
 }
+
+/* 触摸设备无 hover：禁用卡片位移，避免点击后残留 transform 造成视觉跳动 */
+@media (hover: none) {
+  a.figure-card:hover,
+  .figure-card:hover {
+    transform: none;
+  }
+}

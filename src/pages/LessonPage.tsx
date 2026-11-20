@@ -110,14 +110,23 @@ export function LessonPage() {
 
         <div className="markdown">
           {loading ? (
-            <p className="reader-loading">正在载入正文…</p>
+            <div className="reader-skeleton" role="status" aria-label="正在载入正文">
+              <span className="sk-line w70" />
+              <span className="sk-line w100" />
+              <span className="sk-line w95" />
+              <span className="sk-line w100" />
+              <span className="sk-line w88" />
+              <span className="sk-line w100" />
+              <span className="sk-line w60" />
+              <span className="reader-loading">正在载入正文…</span>
+            </div>
           ) : (
             <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
               // 图片：加注说明由 markdown 内的 caption 段落承载
               img: ({ src, alt }) => (
-                <img src={src} alt={alt || ''} loading="lazy" />
+                <img src={src} alt={alt || ''} loading="lazy" decoding="async" />
               ),
               a: ({ href, children }) => {
                 // 站内课程引用 #lesson/01-05 形式

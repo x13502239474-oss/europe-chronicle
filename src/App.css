@@ -2,6 +2,7 @@
 
 .app-shell {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--bg-deep);
@@ -18,9 +19,11 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: linear-gradient(180deg, rgba(14, 26, 43, 0.98), rgba(14, 26, 43, 0.94));
-  backdrop-filter: blur(10px);
+  /* 不透明背景：去掉 backdrop-filter 可避免 iOS 滚动时每帧重绘模糊导致掉帧抖动 */
+  background: #0e1a2b;
   border-bottom: 1px solid rgba(176, 141, 87, 0.18);
+  /* 隔离合成层，避免与下方内容互相影响重绘 */
+  contain: layout style;
 }
 
 .header-inner {
@@ -28,7 +31,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  height: 60px;
+  height: var(--header-h);
 }
 
 .brand {
@@ -138,6 +141,7 @@
   top: 0;
   right: 0;
   height: 100vh;
+  height: 100dvh; /* iOS 地址栏收展时抽屉高度跟随可视区，不再跳动 */
   width: 280px;
   max-width: 82vw;
   background: var(--bg-slate);
@@ -191,14 +195,14 @@
 }
 
 @media (max-width: 520px) {
+  :root {
+    --header-h: 56px; /* 与阅读页 topbar 的 sticky top 共用，消除错位 */
+  }
   .brand {
     font-size: 15px;
   }
   .search-box input {
     width: 64px;
-  }
-  .header-inner {
-    height: 56px;
   }
 }
 

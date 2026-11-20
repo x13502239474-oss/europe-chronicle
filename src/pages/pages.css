@@ -385,3 +385,12 @@
   font-size: 18px;
   padding-top: 2px;
 }
+
+/* 触摸设备无 hover：禁用卡片位移与重阴影，避免点击后残留造成视觉跳动 */
+@media (hover: none) {
+  .part-card:hover,
+  .course-card:hover,
+  .topic-group-card:hover {
+    transform: none;
+  }
+}

@@ -28,17 +28,17 @@
   background: var(--r-bg);
   color: var(--r-text);
   min-height: 100vh;
-  transition: background 0.3s ease, color 0.3s ease;
+  min-height: 100dvh;
 }
 
-/* 阅读页顶部工具条 */
+/* 阅读页顶部工具条：top 跟随主导航实际高度，双 sticky 不再错位 */
 .reader-topbar {
   position: sticky;
-  top: 60px;
+  top: var(--header-h);
   z-index: 90;
   background: var(--r-bg);
   border-bottom: 1px solid var(--r-border);
-  transition: background 0.3s ease;
+  contain: layout style;
 }
 
 .reader-topbar-inner {
@@ -252,11 +252,13 @@
   font-weight: 600;
 }
 
-/* 图片与图注 */
+/* 图片与图注：height:auto + max-width 让浏览器按原始比例预留高度，加载后不撑开页面 */
 .markdown img {
   border-radius: 6px;
   margin: 24px auto;
   box-shadow: var(--shadow);
+  max-width: 100%;
+  height: auto;
 }
 .markdown .figure-caption,
 .markdown figcaption {
@@ -329,11 +331,30 @@
   }
 }
 
-/* 正文按需加载时的占位提示 */
+/* 正文按需加载时的骨架占位：预留足够高度，避免加载完成瞬间页面高度暴涨造成跳动 */
+.reader-skeleton {
+  min-height: 60vh;
+  padding-top: 4px;
+}
+.sk-line {
+  display: block;
+  height: 1em;
+  margin: 0 0 22px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--r-quote-bg) 25%, var(--r-code-bg) 37%, var(--r-quote-bg) 63%);
+  background-size: 400% 100%;
+  opacity: 0.7;
+}
+.sk-line.w70 { width: 70%; }
+.sk-line.w88 { width: 88%; }
+.sk-line.w95 { width: 95%; }
+.sk-line.w100 { width: 100%; }
+.sk-line.w60 { width: 60%; }
 .reader-loading {
-  color: var(--ink-muted, #8a8073);
+  display: block;
+  color: var(--r-muted);
   font-size: 15px;
-  padding: 24px 0;
+  padding: 8px 0 24px;
   letter-spacing: 0.02em;
 }
 

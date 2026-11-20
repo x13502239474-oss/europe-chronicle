@@ -126,12 +126,21 @@ export function ArticlePage({ kind }: { kind: 'topic' | 'figure' }) {
 
         <div className="markdown">
           {loading ? (
-            <p className="reader-loading">正在载入正文…</p>
+            <div className="reader-skeleton" role="status" aria-label="正在载入正文">
+              <span className="sk-line w70" />
+              <span className="sk-line w100" />
+              <span className="sk-line w95" />
+              <span className="sk-line w100" />
+              <span className="sk-line w88" />
+              <span className="sk-line w100" />
+              <span className="sk-line w60" />
+              <span className="reader-loading">正在载入正文…</span>
+            </div>
           ) : (
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
-                img: ({ src, alt }) => <img src={src} alt={alt || ''} loading="lazy" />,
+                img: ({ src, alt }) => <img src={src} alt={alt || ''} loading="lazy" decoding="async" />,
                 a: ({ href, children }) => {
                   if (href?.startsWith('#lesson/')) {
                     const lid = href.slice('#lesson/'.length)

@@ -102,3 +102,11 @@ a.topic-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 22px rgba(30, 26, 20, 0.12);
 }
+
+/* 触摸设备无 hover：禁用条目位移 */
+@media (hover: none) {
+  a.topic-item:hover,
+  .topic-item:hover {
+    transform: none;
+  }
+}

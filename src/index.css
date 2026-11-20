@@ -29,6 +29,10 @@
   --read-max-w: 760px;
   --radius: 8px;
 
+  /* 顶栏高度：多处 sticky 依赖它对齐，统一由这里驱动 */
+  --header-h: 60px;
+  --reader-topbar-h: 52px;
+
   --font-serif: 'Georgia', 'Times New Roman', 'Songti SC', 'SimSun', serif;
   --font-sans: 'Inter', 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
 
@@ -44,6 +48,14 @@ html,
 body {
   margin: 0;
   padding: 0;
+}
+
+/* 使用浏览器原生纵向滚动；治理滚动到顶/底时的弹性位移与滚动链传递 */
+html {
+  overscroll-behavior-y: contain;
+  overflow-x: clip; /* 裁掉意外横向溢出，且不创建滚动容器（不影响 sticky） */
+  -webkit-text-size-adjust: 100%; /* 禁止 iOS 横竖屏切换时自动放大正文 */
+  text-size-adjust: 100%;
 }
 
 body {
