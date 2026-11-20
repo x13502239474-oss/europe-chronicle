@@ -78,3 +78,27 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* 专题条目改为可点击链接 */
+a.topic-item {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+a.topic-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(30, 26, 20, 0.12);
+}
+
+/* 专题条目改为可点击链接 */
+a.topic-item {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+a.topic-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(30, 26, 20, 0.12);
+}

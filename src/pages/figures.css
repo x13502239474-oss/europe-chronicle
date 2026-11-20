@@ -83,3 +83,27 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* 人物卡片改为可点击链接 */
+a.figure-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+a.figure-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(30, 26, 20, 0.12);
+}
+
+/* 人物卡片改为可点击链接 */
+a.figure-card {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+a.figure-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(30, 26, 20, 0.12);
+}

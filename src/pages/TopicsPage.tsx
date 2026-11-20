@@ -28,18 +28,12 @@ export function TopicsPage() {
               </div>
               <div className="topic-grid">
                 {g.items.map((item) => (
-                  <div className="topic-item" key={item.id}>
+                  <Link to={`/topic/${item.id}`} className="topic-item" key={item.id}>
                     <div className="topic-item-title">{item.title}</div>
-                    {item.relatedLessons && item.relatedLessons.length > 0 && (
-                      <div className="topic-item-links">
-                        {item.relatedLessons.map((lid) => (
-                          <Link to={`/lesson/${lid}`} key={lid} className="topic-item-link">
-                            课程 {lid}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                    <div className="topic-item-links">
+                      <span className="topic-item-link">阅读专题 →</span>
+                    </div>
+                  </Link>
                 ))}
               </div>
             </div>

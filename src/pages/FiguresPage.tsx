@@ -22,22 +22,14 @@ export function FiguresPage() {
         <div className="container">
           <div className="figures-grid">
             {figures.map((f) => (
-              <div className="figure-card" key={f.id}>
+              <Link to={`/figure/${f.id}`} className="figure-card" key={f.id}>
                 <div className="figure-name">{f.name}</div>
                 <div className="figure-lifespan">{f.lifespan}</div>
                 <div className="figure-role">{f.role}</div>
                 <div className="figure-links">
-                  {f.relatedLessons && f.relatedLessons.length > 0 ? (
-                    f.relatedLessons.map((lid) => (
-                      <Link to={`/lesson/${lid}`} key={lid} className="figure-link">
-                        课程 {lid}
-                      </Link>
-                    ))
-                  ) : (
-                    <span className="figure-pending">档案编写中</span>
-                  )}
+                  <span className="figure-link">阅读档案 →</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

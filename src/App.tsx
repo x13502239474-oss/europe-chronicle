@@ -6,6 +6,7 @@ import { PartPage } from './pages/PartPage'
 import { LessonPage } from './pages/LessonPage'
 import { TopicsPage } from './pages/TopicsPage'
 import { FiguresPage } from './pages/FiguresPage'
+import { ArticlePage } from './pages/ArticlePage'
 import { TimelinePage } from './pages/TimelinePage'
 import { MapsPage } from './pages/MapsPage'
 import { SearchPage } from './pages/SearchPage'
@@ -28,7 +29,9 @@ export default function App() {
         <Route path="/part/:partId" element={<PartPage />} />
         <Route path="/lesson/:lessonId" element={<LessonPage />} />
         <Route path="/topics" element={<TopicsPage />} />
+        <Route path="/topic/:id" element={<ArticlePage kind="topic" />} />
         <Route path="/figures" element={<FiguresPage />} />
+        <Route path="/figure/:id" element={<ArticlePage kind="figure" />} />
         <Route path="/timeline" element={<TimelinePage />} />
         <Route path="/maps" element={<MapsPage />} />
         <Route path="/search" element={<SearchPage />} />
