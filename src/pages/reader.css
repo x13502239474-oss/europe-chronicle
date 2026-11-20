@@ -328,3 +328,11 @@
     padding: 28px 16px 64px;
   }
 }
+
+/* 正文按需加载时的占位提示 */
+.reader-loading {
+  color: var(--ink-muted, #8a8073);
+  font-size: 15px;
+  padding: 24px 0;
+  letter-spacing: 0.02em;
+}

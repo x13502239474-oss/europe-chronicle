@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { allLessons } from '../data/catalog'
-import { loadLessonContent } from '../lib/content'
+import { loadAllContents } from '../lib/content'
 import './pages.css'
 import './search.css'
 
@@ -17,6 +17,18 @@ export function SearchPage() {
   const [params] = useSearchParams()
   const q = params.get('q') ?? ''
   const [query, setQuery] = useState(q)
+  // 全文只在进入搜索页后加载，避免拖慢首屏
+  const [contents, setContents] = useState<Record<string, string> | null>(null)
+
+  useEffect(() => {
+    let alive = true
+    loadAllContents().then((all) => {
+      if (alive) setContents(all)
+    })
+    return () => {
+      alive = false
+    }
+  }, [])
 
   useEffect(() => {
     setQuery(q)
@@ -24,18 +36,16 @@ export function SearchPage() {
 
   const results = useMemo<SearchResult[]>(() => {
     const kw = query.trim()
-    if (!kw) return []
+    if (!kw || !contents) return []
     const k = kw.toLowerCase()
     const out: SearchResult[] = []
     for (const lesson of allLessons) {
-      const content = loadLessonContent(lesson.file)
+      const content = contents[lesson.file] ?? ''
       const title = lesson.title
-      const hayTitle = title.toLowerCase()
+      const inTitle = title.toLowerCase().includes(k)
       const hayContent = content.toLowerCase()
-      const inTitle = hayTitle.includes(k)
       const inContent = hayContent.includes(k)
       if (inTitle || inContent) {
-        // 提取摘要
         let snippet = ''
         if (inContent) {
           const idx = hayContent.indexOf(k)
@@ -57,7 +67,9 @@ export function SearchPage() {
       }
     }
     return out
-  }, [query])
+  }, [query, contents])
+
+  const indexed = contents !== null
 
   return (
     <main className="page-main">
@@ -87,13 +99,17 @@ export function SearchPage() {
 
       <section className="search-results">
         <div className="container">
-          {query.trim() && (
+          {!indexed && (
+            <div className="search-summary">正在建立全文索引…</div>
+          )}
+
+          {indexed && query.trim() && (
             <div className="search-summary">
               找到 <strong>{results.length}</strong> 条与「{query.trim()}」相关的结果
             </div>
           )}
 
-          {query.trim() && results.length === 0 && (
+          {indexed && query.trim() && results.length === 0 && (
             <div className="search-empty">没有找到相关内容，换个关键词试试。</div>
           )}
 

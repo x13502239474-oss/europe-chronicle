@@ -1,9 +1,9 @@
-import { useMemo, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useParams, Navigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { getLesson, getPart } from '../data/catalog'
-import { loadLessonContent } from '../lib/content'
+import { loadLessonContent, prefetchLessonContent } from '../lib/content'
 import './pages.css'
 import './reader.css'
 
@@ -25,9 +25,31 @@ export function LessonPage() {
     })
   }
 
-  const content = useMemo(() => {
-    if (!lesson) return ''
-    return loadLessonContent(lesson.file)
+  const [content, setContent] = useState('')
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (!lesson) return
+    let alive = true
+    setLoading(true)
+    loadLessonContent(lesson.file).then((text) => {
+      if (!alive) return
+      setContent(text)
+      setLoading(false)
+    })
+    return () => {
+      alive = false
+    }
+  }, [lesson])
+
+  // 预取相邻课程，提升翻页体验
+  useEffect(() => {
+    if (!lesson) return
+    const p = getPart(lesson.partId)
+    if (!p) return
+    const i = p.lessons.findIndex((l) => l.id === lesson.id)
+    if (i > 0) prefetchLessonContent(p.lessons[i - 1].file)
+    if (i >= 0 && i < p.lessons.length - 1) prefetchLessonContent(p.lessons[i + 1].file)
   }, [lesson])
 
   if (!lesson) {
@@ -87,7 +109,10 @@ export function LessonPage() {
         </header>
 
         <div className="markdown">
-          <ReactMarkdown
+          {loading ? (
+            <p className="reader-loading">正在载入正文…</p>
+          ) : (
+            <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
               // 图片：加注说明由 markdown 内的 caption 段落承载
@@ -110,6 +135,7 @@ export function LessonPage() {
           >
             {content}
           </ReactMarkdown>
+          )}
         </div>
       </article>
 
