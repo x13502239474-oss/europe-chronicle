@@ -134,4 +134,13 @@ img {
   .container {
     padding: 0 16px;
   }
+
+  /* 手机端隐藏滚动条，保留触摸滑动 */
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
 }
